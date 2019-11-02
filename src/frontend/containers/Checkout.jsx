@@ -1,30 +1,39 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-one-expression-per-line */
+
 import React from 'react';
 import { connect } from 'react-redux';
+import { removeToCart } from '../actions/index';
 import '../styles/components/Checkout.styl';
 
 const Checkout = (props) => {
-  const { cart } = props;
+  const { cart, total } = props;
+
+  const handleRemoveToCart = (product) => {
+    props.removeToCart(product);
+  };
+
   return (
     <div className="Checkout">
       <div className="Checkout-content">
         {cart.length > 0 ? <h3>Lista de Pedidos:</h3> : <h2>Sin Pedidos</h2>}
         {cart.map(item => (
-          <div className="Checkout-item">
+          <div className="Checkout-item" key={item.id}>
             <div className="Checkout-element">
-              <h4>{item.title}</h4>
-              <span>
-                $
-                {item.price}
-              </span>
+              <h4>{item.title} ?</h4>
+              <span>${item.price}</span>
             </div>
-            <i className="fas fa-trash-alt" />
+            <i
+              className="fas fa-trash-alt"
+              onClick={() => handleRemoveToCart(item)}
+            />
           </div>
         ))}
       </div>
       {cart.length > 0 && (
         <div className="Checkout-sidebar">
           <h3>Precio Total:</h3>
-          <h4>$</h4>
+          <h4>${total}</h4>
         </div>
       )}
     </div>
@@ -34,7 +43,15 @@ const Checkout = (props) => {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    total: state.total,
   };
 };
 
-export default connect(mapStateToProps, null)(Checkout);
+const mapDispatchToProps = {
+  removeToCart,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Checkout);
