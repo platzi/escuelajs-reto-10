@@ -4,7 +4,7 @@ const render = (html, preloadedState) => {
     <html>
       <head>
         <title>Platzi Store</title>
-        <link rel="stylesheet" href="assets/app.css" type="text/css"></link>
+        <link rel="stylesheet" href="assets/app.css" type="text/css"/>
       </head>
       <body>
         <div id="app">${html}</div>

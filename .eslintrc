@@ -26,6 +26,9 @@
     "import"
   ],
   "rules": {
+    "import/prefer-default-export": 0,
+    "global-require": 0,
+    "import/no-extraneous-dependencies": 0,
     "react/jsx-filename-extension": 0,
     "react/destructuring-assignment": 0,
     "array-bracket-spacing": 2,
