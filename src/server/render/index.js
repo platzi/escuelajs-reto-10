@@ -16,8 +16,8 @@ const render = (html, preloadedState) => {
     '\\u003c',
   )}
       </script>
+      <script src="assets/vendor.js" type="text/javascript"></script>
         <script src="assets/app.js" type="text/javascript"></script>
-        <script src="assets/vendor.js" type="text/javascript"></script>
       </body>
     </html>
   `;
