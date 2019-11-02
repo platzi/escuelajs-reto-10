@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import express from 'express';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
@@ -13,7 +14,9 @@ app.use(express.static(`${__dirname}/public`));
 if (ENV === 'development') {
   console.log('Loading dev config');
   const webpackConfig = require('../../webpack.config');
+  // eslint-disable-next-line import/no-extraneous-dependencies
   const webpackDevMiddleware = require('webpack-dev-middleware');
+  // eslint-disable-next-line import/no-extraneous-dependencies
   const webpackHotMiddleware = require('webpack-hot-middleware');
   const compiler = webpack(webpackConfig);
   const serverConfig = {

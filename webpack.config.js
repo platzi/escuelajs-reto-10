@@ -2,11 +2,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const autoprefixer = require('autoprefixer');
 
 dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
-
+console.log(isProduction);
 module.exports = {
   devtool: isProduction ? 'hidden-source-map' : 'cheap-source-map',
   entry: './src/frontend/index.js',
@@ -75,6 +76,11 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer()],
+      },
+    }),
     new MiniCssExtractPlugin({
       filename: 'assets/app.css',
     }),
