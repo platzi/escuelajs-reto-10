@@ -10,6 +10,11 @@ Ya tenemos el backend funcionando con base de datos en la nube, es momento de re
 npm install
 ```
 
+### Build
+```
+npm run build
+```
+
 ### Ejecución
 ```
 npm run start
