@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
 import express from 'express';
 import dotenv from 'dotenv';
 import webpack from 'webpack';

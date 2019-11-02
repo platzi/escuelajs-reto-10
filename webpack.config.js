@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const autoprefixer = require('autoprefixer');
 
 dotenv.config();
 
@@ -79,5 +80,10 @@ module.exports = {
       filename: 'assets/app.css',
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer()],
+      },
+    }),
   ],
 };
