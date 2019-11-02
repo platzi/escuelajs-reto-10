@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addToCart } from '../actions';
+import { addToCart, getProductsRequest } from '../actions';
 import '../styles/components/Products.styl';
 
 const Products = (props) => {
-  const { products } = props;
+  const { products, addToCart, getProductsRequest } = props;
 
-  const handleAddToCart = (product) => {
-    props.addToCart(product);
-  };
+  const handleAddToCart = product => addToCart(product);
+
+  useEffect(() => {
+    getProductsRequest();
+  }, []);
 
   return (
     <div className="Products">
@@ -20,13 +22,15 @@ const Products = (props) => {
               <h2>
                 {product.title}
                 <span>
-                  $
+$
                   {product.price}
                 </span>
               </h2>
               <p>{product.description}</p>
             </div>
-            <button type="button" onClick={() => handleAddToCart(product)}>Comprar</button>
+            <button type="button" onClick={() => handleAddToCart(product)}>
+              Comprar
+            </button>
           </div>
         ))}
       </div>
@@ -42,6 +46,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addToCart,
+  getProductsRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Products);
