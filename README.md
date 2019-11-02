@@ -31,7 +31,7 @@ npm run start
 Debes de crear un "Fork" de este proyecto, revolver los problemas y crear un Pull Request hacia este repositorio.
 
 ### Contribuir
-Si alguien quiere agregar o mejorar algo, lo invito a colaborar directamente en este repositorio: [escuelajs-reto-10](https://github.com/platzi/escuelajs-reto-08/)
+Si alguien quiere agregar o mejorar algo, lo invito a colaborar directamente en este repositorio: [escuelajs-reto-10](https://github.com/platzi/escuelajs-reto-10/)
 
 ### Licencia
 escuelajs-reto-010 se lanza bajo la licencia [MIT](https://opensource.org/licenses/MIT).
