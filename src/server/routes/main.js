@@ -9,56 +9,32 @@ import Layout from '../../frontend/components/Layout';
 import reducer from '../../frontend/reducers';
 import render from '../render';
 
-const initialState = {
-  cart: [],
-  products: [
-    {
-      'id': '1',
-      'image': 'https://arepa.s3.amazonaws.com/camiseta.png',
-      'title': 'Camiseta',
-      'price': 25,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '3',
-      'image': 'https://arepa.s3.amazonaws.com/mug.png',
-      'title': 'Mug',
-      'price': 10,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '4',
-      'image': 'https://arepa.s3.amazonaws.com/pin.png',
-      'title': 'Pin',
-      'price': 4,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '5',
-      'image': 'https://arepa.s3.amazonaws.com/stickers1.png',
-      'title': 'Stickers',
-      'price': 2,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '6',
-      'image': 'https://arepa.s3.amazonaws.com/stickers2.png',
-      'title': 'Stickers',
-      'price': 2,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '7',
-      'image': 'https://arepa.s3.amazonaws.com/hoodie.png',
-      'title': 'Hoodie',
-      'price': 35,
-      'description': 'bla bla bla bla bla',
-    },
-  ],
-};
+const axios = require('axios');
+const dotenv = require('dotenv');
 
-const main = (req, res, next) => {
+dotenv.config();
+const main = async (req, res, next) => {
   try {
+    let initialState;
+
+    try {
+      const procutsAPI = await axios({
+        method: 'get',
+        url: process.env.API_PRODUCTS,
+      });
+
+      initialState = {
+        cart: [],
+        products: procutsAPI.data.data,
+      };
+    } catch (err) {
+      initialState = {
+        cart: [],
+        products: [],
+      };
+      console.error(err);
+    }
+
     const store = createStore(reducer, initialState);
     const html = renderToString(
       <Provider store={store}>

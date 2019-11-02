@@ -31,6 +31,9 @@
     "array-bracket-spacing": 2,
     "arrow-body-style": 0,
     "block-scoped-var": 2,
+    "global-require": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
     "brace-style": [
       2,
       "1tbs",
@@ -233,7 +236,7 @@
       "after"
     ],
     "padded-blocks": 0,
-    "prefer-const": 2,
+    "prefer-const": 1,
     "quote-props": 0,
     "quotes": [
       2,
