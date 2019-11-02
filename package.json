@@ -79,5 +79,13 @@
   "engines": {
     "node": "^8 || ^10",
     "npm": "6.x"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chestergalindo/escuelajs-reto-10.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chestergalindo/escuelajs-reto-10/issues"
+  },
+  "homepage": "https://github.com/chestergalindo/escuelajs-reto-10#readme"
 }
