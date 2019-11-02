@@ -20,13 +20,15 @@ const Products = (props) => {
               <h2>
                 {product.title}
                 <span>
-                  $
+$
                   {product.price}
                 </span>
               </h2>
               <p>{product.description}</p>
             </div>
-            <button type="button" onClick={() => handleAddToCart(product)}>Comprar</button>
+            <button type="button" onClick={() => handleAddToCart(product)}>
+              Comprar
+            </button>
           </div>
         ))}
       </div>
@@ -44,4 +46,7 @@ const mapDispatchToProps = {
   addToCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Products);
