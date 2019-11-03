@@ -1,11 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import request from 'superagent';
 import { Provider } from 'react-redux';
 import { createStore, compose } from 'redux';
 import App from './routes/App';
 import reducer from './reducers';
 
 const composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const API = 'https://platzistore-api.now.sh/';
+request.get(API).end((err, respon) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(respon.body);
+  }
+});
 
 const initialState = {
   cart: [],

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable global-require */
+
 import express from 'express';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
@@ -30,7 +31,11 @@ if (ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
+//body parser
+
 app.get('*', main);
+
+app.use(express.json());
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
