@@ -1,7 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
+
 import express from 'express';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
 import main from './routes/main';
+
+const PlatziStore = require('./routes');
 
 dotenv.config();
 
@@ -28,7 +33,17 @@ if (ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.get('*', main);
+//body parser
+
+app.get('/', main);
+
+app.get('/api', (req, res) => {
+  res.send('API v2');
+});
+
+app.use(express.json());
+
+PlatziStore(app);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);

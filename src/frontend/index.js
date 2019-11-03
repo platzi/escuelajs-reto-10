@@ -1,63 +1,40 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import ReactDOM from 'react-dom';
+import request from 'superagent';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import App from './routes/App';
 import reducer from './reducers';
 
-const initialState = {
+const composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const API = 'http://localhost:3001/api/products';
+let data = {
   cart: [],
-  products: [
-    {
-      'id': '1',
-      'image': 'https://arepa.s3.amazonaws.com/camiseta.png',
-      'title': 'Camiseta',
-      'price': 25,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '3',
-      'image': 'https://arepa.s3.amazonaws.com/mug.png',
-      'title': 'Mug',
-      'price': 10,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '4',
-      'image': 'https://arepa.s3.amazonaws.com/pin.png',
-      'title': 'Pin',
-      'price': 4,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '5',
-      'image': 'https://arepa.s3.amazonaws.com/stickers1.png',
-      'title': 'Stickers',
-      'price': 2,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '6',
-      'image': 'https://arepa.s3.amazonaws.com/stickers2.png',
-      'title': 'Stickers',
-      'price': 2,
-      'description': 'bla bla bla bla bla',
-    },
-    {
-      'id': '7',
-      'image': 'https://arepa.s3.amazonaws.com/hoodie.png',
-      'title': 'Hoodie',
-      'price': 35,
-      'description': 'bla bla bla bla bla',
-    },
-  ],
+  products: [],
 };
+// eslint-disable-next-line consistent-return
+request.get(API).end((err, respon) => {
+  if (err) {
+    console.error(err);
+    data = {
+      cart: [],
+      products: [],
+    };
+  } else {
+    data = {
+      cart: [],
+      products: [...respon.body.data],
+    };
+    const initialState = data;
+    const store = createStore(reducer, initialState, composeEnhacers());
 
-const store = createStore(reducer, initialState);
-
-hydrate(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('app'),
-);
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('app'),
+    );
+    console.log(data);
+    return data;
+  }
+});
