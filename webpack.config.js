@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const autoprefixer = require('autoprefixer-stylus');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 
@@ -52,20 +53,13 @@ module.exports = {
         },
       },
       {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-        ],
-      },
-      {
         test: /\.css|.styl$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
+          'postcss-loader',
           'stylus-loader',
         ],
       },
@@ -75,8 +69,13 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer()],
+      },
+    }),
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
