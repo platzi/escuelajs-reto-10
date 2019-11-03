@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import webpack from 'webpack';
 import main from './routes/main';
 
+const PlatziStore = require('./routes');
+
 dotenv.config();
 
 const ENV = process.env.NODE_ENV;
@@ -33,9 +35,15 @@ if (ENV === 'development') {
 
 //body parser
 
-app.get('*', main);
+app.get('/', main);
+
+app.get('/api', (req, res) => {
+  res.send('API v2');
+});
 
 app.use(express.json());
+
+PlatziStore(app);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
