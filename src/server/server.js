@@ -12,9 +12,9 @@ app.use(express.static(`${__dirname}/public`));
 
 if (ENV === 'development') {
   console.log('Loading dev config');
-  const webpackConfig = require('../../webpack.config');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const webpackConfig = require('../../webpack.config'); // eslint-disable-line global-require
+  const webpackDevMiddleware = require('webpack-dev-middleware'); // eslint-disable-line global-require
+  const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line global-require
   const compiler = webpack(webpackConfig);
   const serverConfig = {
     contentBase: `http://localhost${PORT}`,
