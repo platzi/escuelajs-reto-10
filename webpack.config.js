@@ -34,8 +34,7 @@ module.exports = {
           test(module, chunks) {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
-              isChunks => isChunks.name !== 'vendor' &&
-                /[\\/]node_modules[\\/]/.test(name),
+              isChunks => isChunks.name !== 'vendor' && /[\\/]node_modules[\\/]/.test(name),
             );
           },
         },
