@@ -5,6 +5,7 @@ const render = (html, preloadedState) => {
       <head>
         <title>Platzi Store</title>
         <link rel="stylesheet" href="assets/app.css" type="text/css"></link>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
       </head>
       <body>
         <div id="app">${html}</div>
