@@ -15,6 +15,93 @@ npm install
 npm run start
 ```
 
+## Documentación
+
+### Archivo src/server/routes/main.js
+
+En este archivo realizamos una petición a la API 'https://platzistore-api-afvalenciab.now.sh/api/products' por medio de 'fetch' para obtener los productos que se mostraran en PlatziStore. Adicionalmente se prepara el estado inicial de la aplicación.
+
+```javascript
+const initialState = {
+  cart: [],
+  products: [],
+};
+
+const getProducts = async () => {
+  const API = 'https://platzistore-api-afvalenciab.now.sh/api/products';
+  try {
+    const response = await fetch(API);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const prepareInitialState = async (state) => {
+  const result = await getProducts();
+  return {
+    ...state,
+    products: result,
+  };
+};
+
+...
+  const customInitialState = await prepareInitialState(initialState);
+  const store = createStore(reducer, customInitialState);
+...
+```
+### Archivo src/frontend/index.js
+
+En este archivo se modifica el estado inicial de la aplicación por el estado que se cargó en el 'server'. Adicionalmente se agrega el history para dar funcionalidad a react router y mantener las rutas de nevegación.
+
+```javascript
+if (typeof window !== 'undefined') {
+  let composeEnhacers;
+  if (process.env.NODE_ENV === 'production') {
+    composeEnhacers = compose;
+  } else {
+    composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  }
+
+  const preloadedState = window.__PRELOADED_STATE__;
+  const store = createStore(reducer, preloadedState, composeEnhacers());
+  const history = createBrowserHistory();
+
+  hydrate(
+    <Provider store={store}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>,
+    document.getElementById('app'),
+  );
+}
+```
+
+### Archivo .babelrc
+
+Se agregó el paquete '@babel/plugin-transform-rutime' para permitir el uso del Async await.
+
+```javascript
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-class-properties",
+        "react-hot-loader/babel",
+        "babel-plugin-transform-object-assign",
+        "@babel/plugin-transform-runtime"
+      ]
+    }
+  }
+}
+```
+
 ## RETO
 
 ### Primer problema
