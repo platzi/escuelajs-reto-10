@@ -4,7 +4,7 @@
   "description": "Curso de Server Side Render con Express",
   "main": "server/index.js",
   "scripts": {
-    "build": "webpack-cli --config webpack.config.js",
+    "build": "NODE_ENV=production webpack-cli --config webpack.config.js",
     "start:watch": "webpack-dev-server --open --mode development",
     "start": "node src/server/index.js",
     "start:dev": "nodemon src/server/index.js --exact babel-node",
@@ -40,7 +40,9 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
@@ -60,9 +62,7 @@
     "style-loader": "^0.23.1",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
-    "webpack-dev-middleware": "^3.7.2",
-    "webpack-dev-server": "^3.9.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-dev-server": "^3.9.0"
   },
   "husky": {
     "hooks": {
