@@ -12,4 +12,6 @@ Usuario Platzi:th3_bu6
 ## Reto:
   - [X] Primer problema
   - [X] Segundo problema
+
+  Observación: Para probarlo se recomienda utilizar el api : https://reto9.luisrdz5.now.sh/
   
