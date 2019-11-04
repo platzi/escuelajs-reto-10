@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import express from 'express';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
@@ -32,5 +33,5 @@ app.get('*', main);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
-  console.log(`Server runding on ${PORT}`);
+  console.log(`Server running on ${PORT}`);
 });
