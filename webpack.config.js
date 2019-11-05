@@ -76,7 +76,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
