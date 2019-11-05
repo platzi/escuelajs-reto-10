@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 
@@ -75,6 +76,11 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer()],
+      },
+    }),
     new MiniCssExtractPlugin({
       filename: 'assets/app.css',
     }),

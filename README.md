@@ -35,3 +35,9 @@ Si alguien quiere agregar o mejorar algo, lo invito a colaborar directamente en 
 
 ### Licencia
 escuelajs-reto-010 se lanza bajo la licencia [MIT](https://opensource.org/licenses/MIT).
+
+### Librerias Adicionales
+Se debe instalar redux-trunk para poder conectar redux con fetch para llamar la API
+```
+npm install redux-thunk
+```
