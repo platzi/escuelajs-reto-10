@@ -12,5 +12,5 @@ Usuario Platzi: @wilson_romero
 
 ## Reto:
 
-- [x] Primer problema
-- [] Segundo problema
+- [X] Primer problema
+- [X] Segundo problema
