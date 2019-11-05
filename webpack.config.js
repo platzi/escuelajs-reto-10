@@ -29,13 +29,15 @@ module.exports = {
           chunks: 'all',
           reuseExistingChunk: true,
           priority: 1,
-          filename: 'assets/vendor.js',
+          filename: isProduction ?
+            'assets/vendor-[hash].js' :
+            'assets/vendor.js',
           enforce: true,
           test(module, chunks) {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
               isChunks => isChunks.name !== 'vendor' &&
-                /[\\/]node_modules[\\/]/.test(name),
+                /[\\/]node_modules[\\/]/.test(name)
             );
           },
         },
@@ -76,7 +78,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],

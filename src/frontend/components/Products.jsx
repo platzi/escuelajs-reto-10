@@ -11,22 +11,24 @@ const Products = (props) => {
   };
 
   return (
-    <div className="Products">
-      <div className="Products-items">
+    <div className='Products'>
+      <div className='Products-items'>
         {products.map(product => (
-          <div className="Products-item" key={product.id}>
+          <div className='Products-item' key={product.id}>
             <img src={product.image} alt={product.title} />
-            <div className="Products-item-info">
+            <div className='Products-item-info'>
               <h2>
                 {product.title}
                 <span>
-                  $
+$
                   {product.price}
                 </span>
               </h2>
               <p>{product.description}</p>
             </div>
-            <button type="button" onClick={() => handleAddToCart(product)}>Comprar</button>
+            <button type='button' onClick={() => handleAddToCart(product)}>
+              Comprar
+            </button>
           </div>
         ))}
       </div>
@@ -44,4 +46,7 @@ const mapDispatchToProps = {
   addToCart,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Products);

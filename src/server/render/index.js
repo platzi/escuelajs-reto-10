@@ -1,3 +1,11 @@
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const isProd = process.env.NODE_ENV === 'production';
+let files = false;
+if (process.env.NODE_ENV !== 'development') files = getManifest();
+
 const render = (html, preloadedState) => {
   return `
   <!DOCTYPE html>
@@ -5,6 +13,9 @@ const render = (html, preloadedState) => {
       <head>
         <title>Platzi Store</title>
         <link rel="stylesheet" href="assets/app.css" type="text/css"></link>
+        <link rel="stylesheet" href="${
+  isProd ? files['main.css'] : './assets/app.css'
+}" type="text/css"></link>
       </head>
       <body>
         <div id="app">${html}</div>
@@ -13,11 +24,16 @@ const render = (html, preloadedState) => {
         // http://redux.js.org/recipes/ServerRendering.html#security-considerations
         window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
     /</g,
-    '\\u003c',
+    '\\u003c'
   )}
       </script>
         <script src="assets/app.js" type="text/javascript"></script>
-        <script src="assets/vendor.js" type="text/javascript"></script>
+        <script src="${
+  isProd ? files['main.js'] : './assets/app.js'
+}" type="text/javascript"></script>
+        <script src="${
+  isProd ? files['vendors.js'] : './assets/vendor.js'
+}" type="text/javascript"></script>
       </body>
     </html>
   `;
