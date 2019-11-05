@@ -1,7 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
 import express from 'express';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
 import main from './routes/main';
+import products from './routes/products';
 
 dotenv.config();
 
@@ -28,9 +31,10 @@ if (ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
+products(app);
 app.get('*', main);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
-  console.log(`Server runding on ${PORT}`);
+  console.log(`Server running on ${PORT}`);
 });

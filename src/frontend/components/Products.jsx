@@ -1,32 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addToCart } from '../actions';
+import { addToCart, getProductsRequest } from '../actions';
 import '../styles/components/Products.styl';
 
 const Products = (props) => {
-  const { products } = props;
+  const { products, addToCart, getProductsRequest } = props;
 
   const handleAddToCart = (product) => {
-    props.addToCart(product);
+    addToCart(product);
   };
+
+  useEffect(() => {
+    getProductsRequest();
+  }, []);
 
   return (
     <div className="Products">
       <div className="Products-items">
         {products.map(product => (
-          <div className="Products-item" key={product.id}>
+          <div className="Products-item" key={product._id}>
             <img src={product.image} alt={product.title} />
             <div className="Products-item-info">
               <h2>
                 {product.title}
                 <span>
-                  $
+$
                   {product.price}
                 </span>
               </h2>
               <p>{product.description}</p>
             </div>
-            <button type="button" onClick={() => handleAddToCart(product)}>Comprar</button>
+            <button type="button" onClick={() => handleAddToCart(product)}>
+              Comprar
+            </button>
           </div>
         ))}
       </div>
@@ -42,6 +48,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addToCart,
+  getProductsRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Products);
