@@ -5,6 +5,12 @@ const reducer = (state, action) => {
         ...state,
         cart: [...state.cart, action.payload],
       };
+    case 'SET_PRODUCTS': {
+      return {
+        ...state,
+        products: action.payload.products,
+      };
+    }
     default:
       return state;
   }
