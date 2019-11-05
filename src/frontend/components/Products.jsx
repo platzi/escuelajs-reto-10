@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import addToCart from '../actions';
+import { addToCart } from '../actions';
+import fetchProducts from '../actions/fetch-products';
 import '../styles/components/Products.styl';
 
 const Products = (props) => {
   const { products } = props;
+
+  useEffect(() => {
+    const { fetchProducts } = props;
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = (product) => {
     props.addToCart(product);
@@ -19,10 +25,7 @@ const Products = (props) => {
             <div className="Products-item-info">
               <h2>
                 {product.title}
-                <span>
-$
-                  {product.price}
-                </span>
+                <span>{` $ ${product.price}`}</span>
               </h2>
               <p>{product.description}</p>
             </div>
@@ -44,6 +47,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addToCart,
+  fetchProducts,
 };
 
 export default connect(
