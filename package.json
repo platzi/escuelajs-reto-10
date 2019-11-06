@@ -43,11 +43,13 @@
     "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
+    "autoprefixer": "^9.7.1",
     "babel-eslint": "^10.0.3",
     "css-loader": "^3.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^4.3.0",
+    "eslint-loader": "^3.0.2",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
@@ -56,6 +58,7 @@
     "lint-staged": "^8.2.1",
     "mini-css-extract-plugin": "^0.7.0",
     "nodemon": "^1.19.4",
+    "postcss-loader": "^3.0.0",
     "prettier": "^1.18.2",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.7",
