@@ -60,7 +60,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.css|.styl$/,
+        test: /\.(css|styl)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
