@@ -2,13 +2,14 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const autoprefixer = require('autoprefixer');
 
 dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  devtool: isProduction ? 'hidden-source-map' : 'cheap-source-map',
+  devtool: isProduction ? 'source-map' : 'eval',
   entry: './src/frontend/index.js',
   mode: process.env.NODE_ENV,
   output: {
@@ -35,7 +36,7 @@ module.exports = {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
               isChunks => isChunks.name !== 'vendor' &&
-                /[\\/]node_modules[\\/]/.test(name),
+              /[\\/]node_modules[\\/]/.test(name),
             );
           },
         },
@@ -43,8 +44,7 @@ module.exports = {
     },
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -52,31 +52,40 @@ module.exports = {
         },
       },
       {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-        ],
-      },
-      {
         test: /\.css|.styl$/,
-        use: [
-          {
+        use: [{
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
+          'postcss-loader',
           'stylus-loader',
         ],
       },
+      {
+        test: /\.(png|gif|jpg)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'assets/[hash].[ext]'
+          }
+        }]
+      }
     ],
   },
   devServer: {
     historyApiFallback: true,
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [
+          autoprefixer()
+        ]
+      }
+    }),
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],

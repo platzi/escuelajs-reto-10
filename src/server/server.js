@@ -22,7 +22,9 @@ if (ENV === 'development') {
     publicPath: webpackConfig.output.publicPath,
     hot: true,
     historyApiFallback: true,
-    stats: { colors: true },
+    stats: {
+      colors: true
+    },
   };
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webpackHotMiddleware(compiler));
@@ -32,5 +34,5 @@ app.get('*', main);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
-  console.log(`Server runding on ${PORT}`);
+  console.log(`Server running on ${PORT}`);
 });
