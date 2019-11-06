@@ -23,7 +23,7 @@ if (ENV === 'development') {
     hot: true,
     historyApiFallback: true,
     stats: {
-      colors: true
+      colors: true,
     },
   };
   app.use(webpackDevMiddleware(compiler, serverConfig));

@@ -36,7 +36,7 @@ module.exports = {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
               isChunks => isChunks.name !== 'vendor' &&
-              /[\\/]node_modules[\\/]/.test(name),
+                /[\\/]node_modules[\\/]/.test(name),
             );
           },
         },
@@ -44,7 +44,8 @@ module.exports = {
     },
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -53,7 +54,8 @@ module.exports = {
       },
       {
         test: /\.css|.styl$/,
-        use: [{
+        use: [
+          {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
@@ -63,13 +65,15 @@ module.exports = {
       },
       {
         test: /\.(png|gif|jpg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: 'assets/[hash].[ext]'
-          }
-        }]
-      }
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'assets/[hash].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   devServer: {
@@ -79,10 +83,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {
-        postcss: [
-          autoprefixer()
-        ]
-      }
+        postcss: [autoprefixer()],
+      },
     }),
     new MiniCssExtractPlugin({
       filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
