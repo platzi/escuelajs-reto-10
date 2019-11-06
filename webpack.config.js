@@ -13,7 +13,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   output: {
     path: isProduction ? path.join(process.cwd(), 'src/server/public') : '/',
-    filename: isProduction ? 'assets/app-[hash].js' : 'assets/app.js',
+    filename: 'assets/app.js',
     publicPath: '/',
   },
   resolve: {
@@ -34,8 +34,9 @@ module.exports = {
           test(module, chunks) {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
-              isChunks => isChunks.name !== 'vendor' &&
-                /[\\/]node_modules[\\/]/.test(name),
+              (isChunks) =>
+                isChunks.name !== 'vendor' &&
+                /[\\/]node_modules[\\/]/.test(name)
             );
           },
         },
@@ -50,14 +51,6 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-        ],
       },
       {
         test: /\.css|.styl$/,

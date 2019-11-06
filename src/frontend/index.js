@@ -18,6 +18,6 @@ if (typeof window !== 'undefined') {
         <App />
       </Router>
     </Provider>,
-    document.getElementById('app'),
+    document.getElementById('app')
   );
 }

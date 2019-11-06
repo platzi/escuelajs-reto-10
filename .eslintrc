@@ -5,7 +5,8 @@
     "node": true
   },
   "extends": [
-    "airbnb"
+    "airbnb",
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "document": false,
@@ -26,7 +27,6 @@
     "import"
   ],
   "rules": {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "react/jsx-filename-extension": 0,
     "react/destructuring-assignment": 0,
     "array-bracket-spacing": 2,

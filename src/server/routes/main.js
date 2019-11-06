@@ -65,7 +65,7 @@ const main = (req, res, next) => {
         <StaticRouter location={req.url} context={{}}>
           <Layout>{renderRoutes(Routes)}</Layout>
         </StaticRouter>
-      </Provider>,
+      </Provider>
     );
     const preloadedState = store.getState();
     res.send(render(html, preloadedState));

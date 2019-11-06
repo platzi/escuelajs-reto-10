@@ -9,7 +9,8 @@
     "start": "node src/server/index.js",
     "start:dev": "nodemon src/server/index.js --exact babel-node",
     "format": "prettier --write '{*.js,src/**/*.{js,jsx}}'",
-    "lint": "eslint src/ --fix"
+    "lint": "eslint src/ --fix",
+    "lintNoFix": "eslint src/"
   },
   "keywords": [
     "react",

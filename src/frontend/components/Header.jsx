@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../styles/components/Header.styl';
 
-const Header = props => (
+const Header = (props) => (
   <div className="Header">
     <Link to="/">
       <h1>Platzi Store</h1>
@@ -27,5 +27,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  null,
+  null
 )(Header);
