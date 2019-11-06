@@ -59,3 +59,18 @@ typings/
 
 # next.js build output
 .next
+# IDE
+.idea/*
+*.iml
+*.sublime-*
+
+# OSX
+.DS_Store
+.vscode
+
+# Docs Custom
+.cache/
+yarn-error.log
+
+# Build
+dist/

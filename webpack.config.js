@@ -60,23 +60,13 @@ module.exports = {
         ],
       },
       {
-        test: /\.(s*)css$/,
+        test: /\.css|.styl$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              data: `
-                @import "${path.resolve(__dirname, 'src/frontend/assets/styles/Vars.scss')}";
-                @import "${path.resolve(__dirname, 'src/frontend/assets/styles/Media.scss')}";
-                @import "${path.resolve(__dirname, 'src/frontend/assets/styles/Base.scss')}";
-              `,
-            },
-          },
+          'stylus-loader',
         ],
       },
     ],
