@@ -12,7 +12,7 @@ module.exports = {
   entry: './src/frontend/index.js',
   mode: process.env.NODE_ENV,
   output: {
-    path: isProduction ? path.join(process.cwd(), './src/server/public') : '/',
+    path: isProduction ? path.join(process.cwd(), 'src/server/public') : '/',
     filename: isProduction ? 'assets/app-[hash].js' : 'assets/app.js',
     publicPath: '/',
   },
@@ -29,7 +29,7 @@ module.exports = {
           chunks: 'all',
           reuseExistingChunk: true,
           priority: 1,
-          filename: 'assets/vendor.js',
+          filename: 'assets/vendors.js',
           enforce: true,
           test(module, chunks) {
             const name = module.nameForCondition && module.nameForCondition();
@@ -62,9 +62,7 @@ module.exports = {
       {
         test: /\.css|.styl$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          { loader: MiniCssExtractPlugin.loader },
           'css-loader',
           'stylus-loader',
         ],
