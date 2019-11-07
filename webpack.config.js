@@ -13,7 +13,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   output: {
     path: isProduction ? path.join(process.cwd(), './src/server/public') : '/',
-    filename: isProduction ? 'assets/app-[hash].js' : 'assets/app.js',
+    filename: 'assets/app.js',
     publicPath: '/',
   },
   resolve: {
