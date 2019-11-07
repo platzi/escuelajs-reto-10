@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 dotenv.config();
 
@@ -29,13 +30,16 @@ module.exports = {
           chunks: 'all',
           reuseExistingChunk: true,
           priority: 1,
-          filename: 'assets/vendor.js',
+          filename: isProduction
+            ? 'assets/vendor-[hash].js'
+            : 'assets/vendor.js',
           enforce: true,
           test(module, chunks) {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
-              isChunks => isChunks.name !== 'vendor' &&
-                /[\\/]node_modules[\\/]/.test(name),
+              isChunks =>
+                isChunks.name !== 'vendor' &&
+                /[\\/]node_modules[\\/]/.test(name)
             );
           },
         },
@@ -76,8 +80,9 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
     }),
     new webpack.HotModuleReplacementPlugin(),
+    isProduction ? new ManifestPlugin() : false,
   ],
 };
