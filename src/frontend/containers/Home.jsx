@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import Products from '../components/Products';
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.products = null;
+  }
+
   componentDidMount() {
-    const products = async () => {
+    this.products = async () => {
       let response;
       try {
         response = await fetch('http://localhost:8080/api/products')
@@ -12,15 +17,14 @@ class Home extends Component {
             console.log(json);
             return json;
           })
-          .catch(() => console.error('Ups! Somenthing went wrong. Try again later.'));
-      } catch (error) {
-      }
+          .catch();
+      } catch (error) {}
       return response.data;
     };
   }
 
   render() {
-    return (<div>{this.products}</div>);
+    return <Products products={this.products} />;
   }
 }
 

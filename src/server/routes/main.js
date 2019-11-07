@@ -11,7 +11,7 @@ import render from '../render';
 
 const initialState = {
   cart: [],
- /* products: [
+  /* products: [
     {
       'id': '1',
       'image': 'https://arepa.s3.amazonaws.com/camiseta.png',
