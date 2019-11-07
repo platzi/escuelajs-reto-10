@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import addToCart from '../actions';
+import { addToCart, updateProductsList } from '../actions';
+import useProducts from '../hooks/useProducts';
 import '../styles/components/Products.styl';
+
+const API_URL = 'https://nemo1co-reto09.now.sh/api/products/';
 
 const Products = (props) => {
   const { products } = props;
@@ -9,6 +12,9 @@ const Products = (props) => {
   const handleAddToCart = (product) => {
     props.addToCart(product);
   };
+
+  const productsDB = useProducts(API_URL, products);
+  props.updateProductsList(productsDB);
 
   return (
     <div className="Products">
@@ -44,6 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addToCart,
+  updateProductsList,
 };
 
 export default connect(
