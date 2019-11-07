@@ -2,6 +2,9 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 dotenv.config();
 
@@ -20,6 +23,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   optimization: {
+    minimizer: isProduction ? [new TerserPlugin()] : [],
     splitChunks: {
       chunks: 'async',
       name: true,
@@ -29,13 +33,16 @@ module.exports = {
           chunks: 'all',
           reuseExistingChunk: true,
           priority: 1,
-          filename: 'assets/vendor.js',
+          filename: isProduction
+            ? 'assets/vendor-[hash].js'
+            : 'assets/vendor.js',
           enforce: true,
           test(module, chunks) {
             const name = module.nameForCondition && module.nameForCondition();
             return chunks.some(
-              isChunks => isChunks.name !== 'vendor' &&
-                /[\\/]node_modules[\\/]/.test(name),
+              isChunks =>
+                isChunks.name !== 'vendor' &&
+                /[\\/]node_modules[\\/]/.test(name)
             );
           },
         },
@@ -60,7 +67,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.css|.styl$/,
+        test: /\.(css|styl)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -76,8 +83,15 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
     }),
+    isProduction
+      ? new CompressionPlugin({
+          test: /\.js$|\.css$/,
+          filename: '[path].gz',
+        })
+      : false,
+    isProduction ? new ManifestPlugin() : false,
     new webpack.HotModuleReplacementPlugin(),
   ],
 };
