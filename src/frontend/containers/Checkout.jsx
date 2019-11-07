@@ -8,14 +8,11 @@ const Checkout = (props) => {
     <div className="Checkout">
       <div className="Checkout-content">
         {cart.length > 0 ? <h3>Lista de Pedidos:</h3> : <h2>Sin Pedidos</h2>}
-        {cart.map(item => (
+        {cart.map((item) => (
           <div className="Checkout-item">
             <div className="Checkout-element">
               <h4>{item.title}</h4>
-              <span>
-                $
-                {item.price}
-              </span>
+              <span>{item.price}</span>
             </div>
             <i className="fas fa-trash-alt" />
           </div>
@@ -37,4 +34,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Checkout);
+export default connect(
+  mapStateToProps,
+  null
+)(Checkout);

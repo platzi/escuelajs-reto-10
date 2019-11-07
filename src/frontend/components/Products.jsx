@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addToCart } from '../actions';
+import { addToCart, updateProductsList } from '../actions';
+import usePlatziProducts from '../hooks/usePlatziProducts';
 import '../styles/components/Products.styl';
+
+const API_URL = 'https://nemo1co-reto09.now.sh/api/products/';
 
 const Products = (props) => {
   const { products } = props;
@@ -10,23 +13,25 @@ const Products = (props) => {
     props.addToCart(product);
   };
 
+  const productsDB = usePlatziProducts(API_URL, products);
+  props.updateProductsList(productsDB);
+
   return (
     <div className="Products">
       <div className="Products-items">
-        {products.map(product => (
+        {products.map((product) => (
           <div className="Products-item" key={product.id}>
             <img src={product.image} alt={product.title} />
             <div className="Products-item-info">
               <h2>
                 {product.title}
-                <span>
-                  $
-                  {product.price}
-                </span>
+                <span>{product.price}</span>
               </h2>
               <p>{product.description}</p>
             </div>
-            <button type="button" onClick={() => handleAddToCart(product)}>Comprar</button>
+            <button type="button" onClick={() => handleAddToCart(product)}>
+              Comprar
+            </button>
           </div>
         ))}
       </div>
@@ -42,6 +47,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addToCart,
+  updateProductsList,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Products);

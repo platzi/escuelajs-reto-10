@@ -5,7 +5,8 @@
     "node": true
   },
   "extends": [
-    "airbnb"
+    "airbnb",
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "document": false,
