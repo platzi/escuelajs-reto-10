@@ -2,9 +2,10 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
+const autoprefixer = require('autoprefixer');
 
 dotenv.config();
-
+console.log(process.env.NODE_ENV);
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
@@ -51,16 +52,16 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
-      {
+      /* {
         test: /\.html$/,
         use: [
           {
             loader: 'html-loader',
           },
         ],
-      },
+      }, */
       {
-        test: /\.css|.styl$/,
+        test: /\.styl$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -75,8 +76,13 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer()],
+      },
+    }),
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isProduction ? 'assets/app-[hash].css' : 'assets/app.css',
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
