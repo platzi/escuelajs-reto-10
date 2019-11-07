@@ -8,13 +8,16 @@ dotenv.config();
 const ENV = process.env.NODE_ENV;
 const PORT = process.env.PORT || 3000;
 const app = express();
+
 app.use(express.static(`${__dirname}/public`));
+
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('../../webpack.config');
 
 if (ENV === 'development') {
   console.log('Loading dev config');
-  const webpackConfig = require('../../webpack.config');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
+
   const compiler = webpack(webpackConfig);
   const serverConfig = {
     contentBase: `http://localhost${PORT}`,
