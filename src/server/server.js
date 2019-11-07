@@ -26,11 +26,13 @@ if (ENV === 'development') {
   };
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webpackHotMiddleware(compiler));
+} else {
+  console.log(`loading ${ENV} config`);
 }
 
 app.get('*', main);
 
-app.listen(PORT, (err) => {
+app.listen(PORT, err => {
   if (err) console.log(err);
   console.log(`Server runding on ${PORT}`);
 });

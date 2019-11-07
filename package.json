@@ -9,7 +9,8 @@
     "start": "node src/server/index.js",
     "start:dev": "nodemon src/server/index.js --exact babel-node",
     "format": "prettier --write '{*.js,src/**/*.{js,jsx}}'",
-    "lint": "eslint src/ --fix"
+    "lint": "eslint src/ --fix",
+    "lintNoFix": "eslint src/"
   },
   "keywords": [
     "react",
@@ -31,6 +32,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "ignore-styles": "^5.0.1",
+    "node-fetch": "^2.6.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-hot-loader": "^4.12.15",
@@ -39,11 +41,18 @@
     "react-router-config": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
+    "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-manifest-plugin": "^2.2.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/runtime": "^7.7.2",
     "babel-eslint": "^10.0.3",
+    "babel-polyfill": "^6.26.0",
+    "compression-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
@@ -61,14 +70,9 @@
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-dev-server": "^3.9.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-dev-server": "^3.9.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+  
   "lint-staged": {
     "*.{js,jsx}": [
       "npm run format",
