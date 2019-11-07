@@ -11,7 +11,7 @@ import render from '../render';
 
 const initialState = {
   cart: [],
-  products: [
+ /* products: [
     {
       'id': '1',
       'image': 'https://arepa.s3.amazonaws.com/camiseta.png',
@@ -54,7 +54,7 @@ const initialState = {
       'price': 35,
       'description': 'bla bla bla bla bla',
     },
-  ],
+  ],*/
 };
 
 const main = (req, res, next) => {
