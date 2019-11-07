@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../styles/components/Checkout.styl';
 
-const Checkout = (props) => {
+const Checkout = props => {
   const { cart } = props;
   return (
     <div className="Checkout">
@@ -12,10 +12,7 @@ const Checkout = (props) => {
           <div className="Checkout-item">
             <div className="Checkout-element">
               <h4>{item.title}</h4>
-              <span>
-                $
-                {item.price}
-              </span>
+              <span>${item.price}</span>
             </div>
             <i className="fas fa-trash-alt" />
           </div>
@@ -31,10 +28,13 @@ const Checkout = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     cart: state.cart,
   };
 };
 
-export default connect(mapStateToProps, null)(Checkout);
+export default connect(
+  mapStateToProps,
+  null
+)(Checkout);

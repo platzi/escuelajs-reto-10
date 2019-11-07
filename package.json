@@ -7,9 +7,8 @@
     "build": "webpack-cli --config webpack.config.js",
     "start:watch": "webpack-dev-server --open --mode development",
     "start": "node src/server/index.js",
-    "start:dev": "nodemon src/server/index.js --exact babel-node",
-    "format": "prettier --write '{*.js,src/**/*.{js,jsx}}'",
-    "lint": "eslint src/ --fix"
+    "dev": "nodemon src/server/index.js --exact babel-node",
+    "format": "prettier --write '{*.js,src/**/*.{js,jsx}}'"
   },
   "keywords": [
     "react",
@@ -20,9 +19,12 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.6.4",
+    "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/register": "^7.6.2",
+    "asset-require-hook": "^1.2.0",
+    "axios": "^0.19.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-assign": "^6.22.0",
@@ -39,6 +41,7 @@
     "react-router-config": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
@@ -63,18 +66,6 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.9.0",
     "webpack-hot-middleware": "^2.25.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "npm run format",
-      "npm run lint",
-      "git add"
-    ]
   },
   "engines": {
     "node": "^8 || ^10",
