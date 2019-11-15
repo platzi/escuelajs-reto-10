@@ -23,6 +23,18 @@ const platziStore = (app) => {
     res.status(200).json(storeProducts);
   });
 
+  router.get('/products/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const storeProducts = await productService.getProductsById(id)
+    res.status(200).json(storeProducts);
+  });
+
+  router.put('/products/:id', async (req, res, next) => {
+    const { id } = req.params
+    const storeProducts = await productService.deleteProductById(id)
+    res.status(200).json(storeProducts);
+  });
+
   router.get('*', (req, res) => {
     res.status(404).send('Error 404');
   });
