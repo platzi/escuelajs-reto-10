@@ -29,7 +29,19 @@ const platziStore = (app) => {
     res.status(200).json(storeProducts);
   });
 
+  router.post("/products", async (req, res, next) => {
+    const { body: product } = req
+    const storeProducts = await productService.getProducts(product)
+    res.status(200).json(storeProducts);
+  });
+
   router.put('/products/:id', async (req, res, next) => {
+    const { id } = req.params
+    const storeProducts = await productService.deleteProductById(id)
+    res.status(200).json(storeProducts);
+  });
+
+  router.delete('/products/:id', async (req, res, next) => {
     const { id } = req.params
     const storeProducts = await productService.deleteProductById(id)
     res.status(200).json(storeProducts);
